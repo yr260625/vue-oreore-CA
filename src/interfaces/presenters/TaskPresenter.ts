@@ -1,4 +1,7 @@
-import { TCategory, TTask } from "../view/TaskView";
+import {
+  TCategory,
+  TTask,
+} from "@/interfaces/infrastructure/ITaskInfrastructure";
 
 export interface ITaskPresenter {
   initTaskView(categoryList: TCategory[], taskList: TTask[]): void;

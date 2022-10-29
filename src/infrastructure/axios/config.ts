@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosInstance } from "axios";
+import axios, { AxiosInstance } from "axios";
 import { BASE_URL, TIME_OUT } from "../../features/constants";
 
 const axiosInstance: AxiosInstance = axios.create({

@@ -1,21 +1,21 @@
-import { ITaskApiRepository } from "@/interfaces/infrastructure/TaskApiRepository";
-import { ITaskPresenter } from "@/interfaces/presenter/TaskPresenter";
-import { ITaskRepository } from "@/interfaces/repository/TaskRepository";
-import { ITaskUseCase } from "@/interfaces/usecase/TaskUseCase";
+import { ITaskInfrastructure } from "@/interfaces/infrastructure/ITaskInfrastructure";
+import { ITaskPresenter } from "@/interfaces/presenters/TaskPresenter";
+import { ITaskGateway } from "@/interfaces/gateways/TaskGateway";
+import { ITaskUseCase } from "@/interfaces/usecases/TaskUseCase";
 import { TaskController } from "@/controllers/TaskController";
-import { TaskApiRepository } from "@/infrastructure/TaskApiRepository";
+import { TaskApi } from "@/infrastructure/TaskApi";
 import { TTaskViewState } from "@/interfaces/view/TaskView";
 import { TaskPresenter } from "@/presenters/TaskPresenter";
-import { TaskRepository } from "@/repositories/TaskRepository";
+import { TaskGateway } from "@/gateways/TaskGateway";
 import { TaskUseCase } from "@/usecases/TaskUseCase";
 import { InjectionKey, reactive, inject } from "vue";
 
 // dependency injection
 const getTaskController = (state: TTaskViewState): TaskController => {
-  const apiRepository: ITaskApiRepository = new TaskApiRepository();
-  const repository: ITaskRepository = new TaskRepository(apiRepository);
+  const infrastructure: ITaskInfrastructure = new TaskApi();
+  const gateway: ITaskGateway = new TaskGateway(infrastructure);
   const presenter: ITaskPresenter = new TaskPresenter(state);
-  const usecase: ITaskUseCase = new TaskUseCase(repository, presenter);
+  const usecase: ITaskUseCase = new TaskUseCase(gateway, presenter);
   return new TaskController(usecase);
 };
 

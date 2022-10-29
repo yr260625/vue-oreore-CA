@@ -1,5 +1,9 @@
-import { ITaskPresenter } from "@/interfaces/presenter/TaskPresenter";
-import { TCategory, TTask, TTaskViewState } from "@/interfaces/view/TaskView";
+import { ITaskPresenter } from "@/interfaces/presenters/TaskPresenter";
+import { TTaskViewState } from "@/interfaces/view/TaskView";
+import {
+  TCategory,
+  TTask,
+} from "@/interfaces/infrastructure/ITaskInfrastructure";
 
 export class TaskPresenter implements ITaskPresenter {
   constructor(readonly taskViewState: TTaskViewState) {}

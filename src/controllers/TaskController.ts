@@ -1,4 +1,4 @@
-import { ITaskUseCase } from "@/interfaces/usecase/TaskUseCase";
+import { ITaskUseCase } from "@/interfaces/usecases/TaskUseCase";
 
 export class TaskController {
   constructor(private readonly usecase: ITaskUseCase) {}

@@ -1,12 +1,11 @@
 import { Task } from "@/entities";
-import { ITaskPresenter } from "@/interfaces/presenter/TaskPresenter";
-import { ITaskRepository } from "@/interfaces/repository/TaskRepository";
-import { ITaskUseCase } from "@/interfaces/usecase/TaskUseCase";
-import { TTask } from "@/interfaces/view/TaskView";
+import { ITaskPresenter } from "@/interfaces/presenters/TaskPresenter";
+import { ITaskGateway } from "@/interfaces/gateways/TaskGateway";
+import { ITaskUseCase } from "@/interfaces/usecases/TaskUseCase";
 
 export class TaskUseCase implements ITaskUseCase {
   constructor(
-    private readonly repository: ITaskRepository,
+    private readonly gateway: ITaskGateway,
     private readonly presenter: ITaskPresenter
   ) {}
 
@@ -16,8 +15,8 @@ export class TaskUseCase implements ITaskUseCase {
   async initTaskView(): Promise<void> {
     try {
       const [categoryList, taskList] = await Promise.all([
-        this.repository.findAllCategories(),
-        this.repository.findAll(),
+        this.gateway.findAllCategories(),
+        this.gateway.findAll(),
       ]);
       this.presenter.initTaskView(categoryList, taskList);
     } catch (error: unknown) {
@@ -33,7 +32,7 @@ export class TaskUseCase implements ITaskUseCase {
   async addTask(categoryId: number, title: string): Promise<void> {
     try {
       const task: Task = Task.createUnPostedTask(categoryId, title);
-      const newTask: TTask = await this.repository.save(task);
+      const newTask = await this.gateway.save(task);
       this.presenter.addTaskState(newTask);
     } catch (error: unknown) {
       this.presenter.setError(this.getErrorMessage(error));
@@ -60,7 +59,7 @@ export class TaskUseCase implements ITaskUseCase {
         title,
         detail
       );
-      await this.repository.update(task);
+      await this.gateway.update(task);
     } catch (error: unknown) {
       this.presenter.setErrorDetail(taskId, this.getErrorMessage(error));
     }
@@ -72,7 +71,7 @@ export class TaskUseCase implements ITaskUseCase {
    */
   async deleteTask(taskId: number): Promise<void> {
     try {
-      await this.repository.deleteById(taskId);
+      await this.gateway.deleteById(taskId);
       this.presenter.removeTaskStateById(taskId);
     } catch (error: unknown) {
       this.presenter.setErrorDetail(taskId, this.getErrorMessage(error));

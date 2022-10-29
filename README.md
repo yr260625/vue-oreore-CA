@@ -27,16 +27,16 @@ src
 |   `-- vo
 |-- usecase
 |-- infrastructure
-|   |-- TaskApiRepository.ts
+|   |-- TaskApi.ts
 |   `-- axios
 |       `-- config.ts
 |-- repositories
 |-- presenters
 |-- interfaces
 |   |-- infrastructure
-|   |-- presenter
-|   |-- repository
-|   |-- usecase
+|   |-- presenters
+|   |-- gateways
+|   |-- usecases
 |   `-- view
 `-- view
     |-- App.vue
@@ -65,15 +65,15 @@ src
 
 ### usecases
 
-アプリケーション固有の業務ロジックを担当する。controllerの処理振り分けにより実行される。repositoryによるデータ処理と、処理結果をpresenterに伝播させる。
+アプリケーション固有の業務ロジックを担当する。controllerの処理振り分けにより実行される。gatewayによるデータ処理と、処理結果をpresenterに伝播させる。
 
 ### entities
 
 一般的な規則などを抽象化したオブジェクト。データの加工やバリデーションなどの業務ロジックを担当する。
 
-### repositories
+### gateways
 
-同心円におけるGatewayに相当する。usecaseからインターフェースを介して実行される。DB保存やAPI実行などのデータ操作を抽象化する。infrastructureのインターフェースを介して、DBからの取得や保存、API実行などを行う。
+usecaseからインターフェースを介して実行される。DB保存やAPI実行などのデータ操作を抽象化する。infrastructureのインターフェースを介して、DBからの取得や保存、API実行などを行う。
 
 ### infrastructure
 
@@ -99,15 +99,15 @@ left to right direction
 agent controller
 agent view
 agent usecases
-agent repositories
+agent gateways
 agent presentations
 agent viewState
 agent APIDriver #aliceblue;line:blue
 
 view --> controller: イベントハンドリング
 controller --> usecases: 処理振り分け
-usecases --> repositories: データ処理を委譲
-repositories --> APIDriver
+usecases --> gateways: データ処理を委譲
+gateways --> APIDriver
 usecases -> presentations: データ処理結果を委譲
 viewState <-- presentations: viewStateを更新
 view <-- viewState

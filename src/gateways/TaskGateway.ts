@@ -1,12 +1,15 @@
-import { ITaskRepository } from "@/interfaces/repository/TaskRepository";
+import { ITaskGateway } from "@/interfaces/gateways/TaskGateway";
 import { Task } from "@/entities";
-import { ITaskApiRepository } from "@/interfaces/infrastructure/TaskApiRepository";
-import { TCategory, TTask } from "@/interfaces/view/TaskView";
+import {
+  ITaskInfrastructure,
+  TCategory,
+  TTask,
+} from "@/interfaces/infrastructure/ITaskInfrastructure";
 
-export class TaskRepository implements ITaskRepository {
-  private readonly infrastructure: ITaskApiRepository;
+export class TaskGateway implements ITaskGateway {
+  private readonly infrastructure: ITaskInfrastructure;
 
-  constructor(infrastructure: ITaskApiRepository) {
+  constructor(infrastructure: ITaskInfrastructure) {
     this.infrastructure = infrastructure;
   }
   findAll(): Promise<TTask[]> {
@@ -14,6 +17,7 @@ export class TaskRepository implements ITaskRepository {
   }
   save(task: Task): Promise<TTask> {
     const saveItem = {
+      id: task.id,
       category: task.category.id,
       title: task.title.value,
       detail: task.detail.value,

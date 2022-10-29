@@ -1,24 +1,23 @@
 import { AxiosResponse } from "axios";
 import axios from "@/infrastructure/axios/config";
 import {
-  ITaskApiRepository,
-  saveItem,
-  updateItem,
-} from "@/interfaces/infrastructure/TaskApiRepository";
-import { TCategory, TTask } from "@/interfaces/view/TaskView";
+  ITaskInfrastructure,
+  TCategory,
+  TTask,
+} from "@/interfaces/infrastructure/ITaskInfrastructure";
 
-export class TaskApiRepository implements ITaskApiRepository {
+export class TaskApi implements ITaskInfrastructure {
   async findAll(): Promise<TTask[]> {
     const res: AxiosResponse<TTask[]> = await axios.get<TTask[]>("/task/");
     return res.data;
   }
 
-  async save(task: saveItem): Promise<TTask> {
+  async save(task: TTask): Promise<TTask> {
     const res: AxiosResponse<TTask> = await axios.post<TTask>("/task/", task);
     return res.data;
   }
 
-  async update(task: updateItem): Promise<TTask> {
+  async update(task: TTask): Promise<TTask> {
     const res: AxiosResponse<TTask> = await axios.put<TTask>(
       `/task/${task.id}/`,
       task
@@ -37,3 +36,9 @@ export class TaskApiRepository implements ITaskApiRepository {
     return res.data;
   }
 }
+
+const test = [
+  { id: 1, name: "category1" },
+  { id: 2, name: "category2" },
+  { id: 3, name: "category3" },
+];

@@ -2,7 +2,7 @@ import {
   ITaskInfrastructure,
   TCategory,
   TTask,
-} from "@/interfaces/infrastructure/ITaskInfrastructure";
+} from "@/interfaces/infrastructure/TaskInfrastructure";
 
 export class TaskSessionStorage implements ITaskInfrastructure {
   private readonly storage: Storage = window.sessionStorage;

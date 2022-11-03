@@ -9,7 +9,7 @@ export type TTaskView = {
   detail: string;
   error?: string;
 };
-export type TTaskViewState = {
+export interface ITaskViewState {
   // used in TaskListHeader
   categories: TCategoryView[];
   categoryId: number;
@@ -17,4 +17,4 @@ export type TTaskViewState = {
   errorSummary: string;
   // used in TaskListItems
   tasks: TTaskView[];
-};
+}

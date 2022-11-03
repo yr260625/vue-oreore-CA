@@ -4,7 +4,7 @@ import {
   ITaskInfrastructure,
   TCategory,
   TTask,
-} from "@/interfaces/infrastructure/ITaskInfrastructure";
+} from "@/interfaces/infrastructure/TaskInfrastructure";
 
 export class TaskApi implements ITaskInfrastructure {
   async findAll(): Promise<TTask[]> {

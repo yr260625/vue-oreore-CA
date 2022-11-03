@@ -4,7 +4,7 @@ import {
   ITaskInfrastructure,
   TCategory,
   TTask,
-} from "@/interfaces/infrastructure/ITaskInfrastructure";
+} from "@/interfaces/infrastructure/TaskInfrastructure";
 
 export class TaskGateway implements ITaskGateway {
   private readonly infrastructure: ITaskInfrastructure;

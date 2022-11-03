@@ -1,12 +1,12 @@
 import { ITaskPresenter } from "@/interfaces/presenters/TaskPresenter";
-import { TTaskViewState } from "@/interfaces/view/TaskView";
+import { ITaskViewState } from "@/interfaces/view/TaskViewState";
 import {
   TCategory,
   TTask,
-} from "@/interfaces/infrastructure/ITaskInfrastructure";
+} from "@/interfaces/infrastructure/TaskInfrastructure";
 
 export class TaskPresenter implements ITaskPresenter {
-  constructor(readonly taskViewState: TTaskViewState) {}
+  constructor(readonly taskViewState: ITaskViewState) {}
 
   initTaskView(categoryList: TCategory[], taskList: TTask[]) {
     this.taskViewState.categories = categoryList;

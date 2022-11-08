@@ -1,4 +1,4 @@
-import { TaskController } from "@/controllers/TaskController";
+import { TaskControllerFactory } from "@/controllers/factory/TaskControllerFactory";
 import { ITaskViewState } from "@/interfaces/view/TaskViewState";
 import { InjectionKey, reactive, inject } from "vue";
 
@@ -15,7 +15,7 @@ export const taskState = () => {
 
   return {
     taskViewState,
-    controller: TaskController.create(taskViewState),
+    controller: new TaskControllerFactory(taskViewState).create(),
   };
 };
 

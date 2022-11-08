@@ -1,4 +1,6 @@
+import { IS_TEST_MODE } from "@/features/constants";
 import { TaskGateway } from "@/gateways/TaskGateway";
+import { TaskApi } from "@/infrastructure/TaskApi";
 import { TaskSessionStorage } from "@/infrastructure/TaskSessionStorage";
 import { ITaskGateway } from "@/interfaces/gateways/TaskGateway";
 import { ITaskInfrastructure } from "@/interfaces/infrastructure/TaskInfrastructure";
@@ -23,7 +25,10 @@ export class TaskControllerFactory extends ControllerFactory<
   }
 
   getInfrastructure(): ITaskInfrastructure {
-    return new TaskSessionStorage();
+    if (IS_TEST_MODE) {
+      return new TaskSessionStorage();
+    }
+    return new TaskApi();
   }
   getGateway(infrastructure: ITaskInfrastructure): ITaskGateway {
     return new TaskGateway(infrastructure);

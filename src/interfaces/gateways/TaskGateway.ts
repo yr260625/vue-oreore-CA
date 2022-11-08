@@ -1,5 +1,5 @@
 import { Task } from "@/entities";
-import { TCategory, TTask } from "../infrastructure/ITaskInfrastructure";
+import { TCategory, TTask } from "../infrastructure/TaskInfrastructure";
 
 export interface ITaskGateway {
   findAll(): Promise<TTask[]>;

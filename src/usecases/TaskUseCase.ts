@@ -1,9 +1,9 @@
 import { Task } from "@/entities";
 import { ITaskPresenter } from "@/interfaces/presenters/TaskPresenter";
 import { ITaskGateway } from "@/interfaces/gateways/TaskGateway";
-import { ITaskUseCase } from "@/interfaces/usecases/TaskUseCase";
+import { ITaskUsecase } from "@/interfaces/usecases/TaskUsecase";
 
-export class TaskUseCase implements ITaskUseCase {
+export class TaskUsecase implements ITaskUsecase {
   constructor(
     private readonly gateway: ITaskGateway,
     private readonly presenter: ITaskPresenter

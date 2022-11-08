@@ -1,4 +1,4 @@
-export interface ITaskUseCase {
+export interface ITaskUsecase {
   initTaskView(): Promise<void>;
   addTask(categoryId: number, title: string): Promise<void>;
   updateTask(

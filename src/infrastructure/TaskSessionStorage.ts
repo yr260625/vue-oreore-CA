@@ -2,10 +2,11 @@ import {
   ITaskInfrastructure,
   TCategory,
   TTask,
-} from "@/interfaces/infrastructure/ITaskInfrastructure";
+} from "@/interfaces/infrastructure/TaskInfrastructure";
 
 export class TaskSessionStorage implements ITaskInfrastructure {
   private readonly storage: Storage = window.sessionStorage;
+  private counter: number = 0;
 
   async findAll(): Promise<TTask[]> {
     const unparsedTasks: string | null = this.storage.getItem("tasks");
@@ -18,14 +19,15 @@ export class TaskSessionStorage implements ITaskInfrastructure {
   async save(task: TTask): Promise<TTask> {
     const beforeTasks: TTask[] = await this.findAll();
     const addTask: TTask = {
-      id: beforeTasks.length,
+      id: this.counter,
       category: task.category,
       title: task.title,
       detail: task.detail,
     };
     const newTasks: TTask[] = [...beforeTasks, addTask];
     this.storage.setItem("tasks", JSON.stringify(newTasks));
-    return task;
+    this.counter += 1;
+    return addTask;
   }
 
   async update(task: TTask): Promise<TTask> {

@@ -1,7 +1,7 @@
-import { ITaskUseCase } from "@/interfaces/usecases/TaskUseCase";
+import { ITaskUsecase } from "@/interfaces/usecases/TaskUsecase";
 
 export class TaskController {
-  constructor(private readonly usecase: ITaskUseCase) {}
+  constructor(private readonly usecase: ITaskUsecase) {}
 
   initTaskView() {
     this.usecase.initTaskView();

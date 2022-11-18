@@ -1,10 +1,10 @@
-import { ITaskGateway } from "@/interfaces/gateways/TaskGateway";
-import { Task } from "@/entities";
+import { Task } from "src/domain/tasks/TaskEntity";
 import {
   ITaskInfrastructure,
-  TCategory,
   TTask,
-} from "@/interfaces/infrastructure/TaskInfrastructure";
+  TCategory,
+} from "src/driver/task/interface/TaskInfrastructure";
+import { ITaskGateway } from "./interfaces/TaskGateway";
 
 export class TaskGateway implements ITaskGateway {
   private readonly infrastructure: ITaskInfrastructure;

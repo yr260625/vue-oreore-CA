@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import Header from "@/view/components/globals/Header.vue";
-import TaskPageHeader from "@/view/components/parts/task/TaskPageHeader.vue";
-import TaskItemList from "@/view/components/parts/task/TaskItemList.vue";
-import { taskState, taskStateKey } from "@/view/hooks/task/useTask";
 import { provide } from "vue";
+import Header from "../globals/Header.vue";
+import TaskItemList from "./TaskItemList.vue";
+import TaskPageHeader from "./TaskPageHeader.vue";
+import { taskStateKey, taskState } from "./useTask";
 
 // initialize and provide
 provide(taskStateKey, taskState());
@@ -16,5 +16,3 @@ provide(taskStateKey, taskState());
     <TaskItemList></TaskItemList>
   </div>
 </template>
-
-<style></style>

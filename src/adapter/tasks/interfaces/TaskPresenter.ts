@@ -1,7 +1,4 @@
-import {
-  TCategory,
-  TTask,
-} from "@/interfaces/infrastructure/TaskInfrastructure";
+import { TCategory, TTask } from "src/driver/task/interface/TaskInfrastructure";
 
 export interface ITaskPresenter {
   initTaskView(categoryList: TCategory[], taskList: TTask[]): void;

@@ -1,5 +1,7 @@
-import { TaskTitle, TaskDetail, CategoryName } from "@/entities/vo";
-import { Category } from "@/entities/Category";
+import { Category } from "./Category";
+import { CategoryName } from "./vo/CategoryName";
+import { TaskDetail } from "./vo/TaskDetail";
+import { TaskTitle } from "./vo/TaskTitle";
 
 export class Task {
   constructor(

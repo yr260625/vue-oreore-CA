@@ -1,5 +1,5 @@
-import { Task } from "@/entities";
-import { TCategory, TTask } from "../infrastructure/TaskInfrastructure";
+import { Task } from "src/domain/tasks/TaskEntity";
+import { TTask, TCategory } from "src/driver/task/interface/TaskInfrastructure";
 
 export interface ITaskGateway {
   findAll(): Promise<TTask[]>;

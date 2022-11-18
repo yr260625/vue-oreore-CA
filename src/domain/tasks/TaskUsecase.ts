@@ -1,7 +1,7 @@
-import { Task } from "@/entities";
-import { ITaskPresenter } from "@/interfaces/presenters/TaskPresenter";
-import { ITaskGateway } from "@/interfaces/gateways/TaskGateway";
-import { ITaskUsecase } from "@/interfaces/usecases/TaskUsecase";
+import { ITaskGateway } from "src/adapter/tasks/interfaces/TaskGateway";
+import { ITaskPresenter } from "src/adapter/tasks/interfaces/TaskPresenter";
+import { ITaskUsecase } from "./interface/TaskUsecase";
+import { Task } from "./TaskEntity";
 
 export class TaskUsecase implements ITaskUsecase {
   constructor(

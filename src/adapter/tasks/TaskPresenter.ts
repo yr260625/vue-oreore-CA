@@ -1,9 +1,6 @@
-import { ITaskPresenter } from "@/interfaces/presenters/TaskPresenter";
-import { ITaskViewState } from "@/interfaces/view/TaskViewState";
-import {
-  TCategory,
-  TTask,
-} from "@/interfaces/infrastructure/TaskInfrastructure";
+import { TCategory, TTask } from "src/driver/task/interface/TaskInfrastructure";
+import { ITaskPresenter } from "./interfaces/TaskPresenter";
+import { ITaskViewState } from "./view/TaskViewState";
 
 export class TaskPresenter implements ITaskPresenter {
   constructor(readonly taskViewState: ITaskViewState) {}

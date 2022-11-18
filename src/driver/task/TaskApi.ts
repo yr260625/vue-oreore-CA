@@ -1,10 +1,9 @@
-import { AxiosResponse } from "axios";
-import axios from "@/infrastructure/axios/config";
+import axios, { AxiosResponse } from "axios";
 import {
   ITaskInfrastructure,
-  TCategory,
   TTask,
-} from "@/interfaces/infrastructure/TaskInfrastructure";
+  TCategory,
+} from "./interface/TaskInfrastructure";
 
 export class TaskApi implements ITaskInfrastructure {
   async findAll(): Promise<TTask[]> {

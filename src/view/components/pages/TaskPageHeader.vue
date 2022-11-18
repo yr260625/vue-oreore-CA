@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { PlusIcon } from "@heroicons/vue/24/outline";
-import { useTask } from "@/view/hooks/task/useTask";
+import { useTask } from "./useTask";
 
 // state
 const { taskViewState, controller } = useTask();

@@ -1,6 +1,6 @@
-import { TaskControllerFactory } from "@/controllers/factory/TaskControllerFactory";
-import { ITaskViewState } from "@/interfaces/view/TaskViewState";
-import { InjectionKey, reactive, inject } from "vue";
+import { ITaskViewState } from "src/adapter/tasks/view/TaskViewState";
+import { TaskControllerFactory } from "src/controller/factory/TaskControllerFactory";
+import { reactive, InjectionKey, inject } from "vue";
 
 // provided state in task components
 export const taskState = () => {

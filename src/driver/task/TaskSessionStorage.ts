@@ -2,7 +2,7 @@ import {
   ITaskInfrastructure,
   TCategory,
   TTask,
-} from "@/interfaces/infrastructure/TaskInfrastructure";
+} from "./interface/TaskInfrastructure";
 
 export class TaskSessionStorage implements ITaskInfrastructure {
   private categories: TCategory[] = [

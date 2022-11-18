@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from "axios";
-import { BASE_URL, TIME_OUT } from "../../features/constants";
+import { BASE_URL, TIME_OUT } from "src/features/constants";
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: BASE_URL,

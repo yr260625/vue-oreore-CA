@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { XMarkIcon, ArrowPathIcon } from "@heroicons/vue/24/outline";
-import { useTask } from "@/view/hooks/task/useTask";
+import { useTask } from "./useTask";
 import draggable from "vuedraggable";
 
 // init

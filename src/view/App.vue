@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Tasks from "./components/pages/Tasks.vue";
+import Tasks from "./components/pages/tasks/Tasks.vue";
 import "./index.css";
 </script>
 

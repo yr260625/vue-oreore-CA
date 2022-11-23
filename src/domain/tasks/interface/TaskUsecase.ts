@@ -1,11 +1,8 @@
+import { TaskInputData } from "../TaskInputData";
+
 export interface ITaskUsecase {
-  initTaskView(): Promise<void>;
-  addTask(categoryId: number, title: string): Promise<void>;
-  updateTask(
-    taskId: number,
-    categoryId: number,
-    title: string,
-    detail: string
-  ): Promise<void>;
+  init(): Promise<void>;
+  addTask(taskInputData: TaskInputData): Promise<void>;
+  updateTask(taskInputData: TaskInputData): Promise<void>;
   deleteTask(id: number): Promise<void>;
 }

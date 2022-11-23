@@ -1,7 +1,9 @@
 import { ITaskGateway } from "src/adapter/tasks/interfaces/TaskGateway";
 import { ITaskPresenter } from "src/adapter/tasks/interfaces/TaskPresenter";
 import { ITaskUsecase } from "./interface/TaskUsecase";
-import { Task } from "./TaskEntity";
+import { TaskInputData } from "./TaskInputData";
+import { TaskInitOutputData } from "./TaskInitOutputData";
+import { TaskAddedOutputData } from "./TaskAddedOutputData";
 
 export class TaskUsecase implements ITaskUsecase {
   constructor(
@@ -12,13 +14,14 @@ export class TaskUsecase implements ITaskUsecase {
   /**
    * concurrently get all categories and tasks, and initialize the state of vue.
    */
-  async initTaskView(): Promise<void> {
+  async init(): Promise<void> {
     try {
       const [categoryList, taskList] = await Promise.all([
         this.gateway.findAllCategories(),
         this.gateway.findAll(),
       ]);
-      this.presenter.initTaskView(categoryList, taskList);
+      const outputData = new TaskInitOutputData(categoryList, taskList);
+      this.presenter.init(outputData);
     } catch (error: unknown) {
       this.presenter.setError(this.getErrorMessage(error));
     }
@@ -26,14 +29,14 @@ export class TaskUsecase implements ITaskUsecase {
 
   /**
    * save single task in DB, and add the task the state of vue.
-   * @param categoryId
-   * @param title
+   * @param taskInputData
    */
-  async addTask(categoryId: number, title: string): Promise<void> {
+  async addTask(taskInputData: TaskInputData): Promise<void> {
     try {
-      const task: Task = Task.createUnPostedTask(categoryId, title);
+      const task = taskInputData.createTask();
       const newTask = await this.gateway.save(task);
-      this.presenter.addTaskState(newTask);
+      const outputData = TaskAddedOutputData.createFromEntity(newTask);
+      this.presenter.addTask(outputData);
     } catch (error: unknown) {
       this.presenter.setError(this.getErrorMessage(error));
     }
@@ -41,27 +44,17 @@ export class TaskUsecase implements ITaskUsecase {
 
   /**
    * update single task in DB.
-   * @param taskId
-   * @param categoryId
-   * @param title
-   * @param detail
+   * @param taskInputData
    */
-  async updateTask(
-    taskId: number,
-    categoryId: number,
-    title: string,
-    detail: string
-  ): Promise<void> {
+  async updateTask(taskInputData: TaskInputData): Promise<void> {
     try {
-      const task: Task = Task.createPostedTask(
-        taskId,
-        categoryId,
-        title,
-        detail
-      );
+      const task = taskInputData.createTask();
       await this.gateway.update(task);
     } catch (error: unknown) {
-      this.presenter.setErrorDetail(taskId, this.getErrorMessage(error));
+      this.presenter.setErrorDetail(
+        taskInputData.id,
+        this.getErrorMessage(error)
+      );
     }
   }
 
@@ -72,7 +65,7 @@ export class TaskUsecase implements ITaskUsecase {
   async deleteTask(taskId: number): Promise<void> {
     try {
       await this.gateway.deleteById(taskId);
-      this.presenter.removeTaskStateById(taskId);
+      this.presenter.removeTask(taskId);
     } catch (error: unknown) {
       this.presenter.setErrorDetail(taskId, this.getErrorMessage(error));
     }

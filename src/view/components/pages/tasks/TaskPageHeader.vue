@@ -3,7 +3,7 @@ import { PlusIcon } from "@heroicons/vue/24/outline";
 import { useTask } from "./useTask";
 
 // state
-const { taskViewState, controller } = useTask();
+const { taskViewModel, controller } = useTask();
 
 const inputStyle = (error: string) => {
   if (error) {
@@ -28,18 +28,18 @@ const inputStyle = (error: string) => {
     <div class="flex gap-2">
       <div class="w-full">
         <input
-          v-model="taskViewState.taskTitle"
+          v-model="taskViewModel.taskTitle"
           class="w-full border focus:ring-2 leading-8 outline-none px-3 py-1 rounded text-base"
           type="text"
           placeholder="Input your Task"
         />
       </div>
       <select
-        v-model="taskViewState.categoryId"
+        v-model="taskViewModel.categoryId"
         class="border-2 border-gray-300 focus:ring-2 leading-8 outline-none px-3 py-1 rounded text-base"
       >
         <option
-          v-for="category in taskViewState.categories"
+          v-for="category in taskViewModel.categories"
           :value="category.id"
           :key="category.id"
         >
@@ -48,7 +48,7 @@ const inputStyle = (error: string) => {
       </select>
       <div
         @click="
-          controller.addTask(taskViewState.categoryId, taskViewState.taskTitle)
+          controller.addTask(taskViewModel.categoryId, taskViewModel.taskTitle)
         "
         class="flex align-center justify-center p-2 cursor-pointer bg-teal-400 border active:bg-teal-800 text-base text-white rounded-lg hover:bg-teal-600 disabled:opacity-50"
       >
@@ -56,10 +56,10 @@ const inputStyle = (error: string) => {
       </div>
     </div>
     <p
-      v-show="taskViewState.errorSummary"
+      v-show="taskViewModel.errorSummary"
       class="text-red-500 tracking-wide h-6 px-3 text-sm first-letter:"
     >
-      {{ taskViewState.errorSummary }}
+      {{ taskViewModel.errorSummary }}
     </p>
   </div>
 </template>

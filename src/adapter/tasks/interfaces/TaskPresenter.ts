@@ -1,9 +1,10 @@
-import { TCategory, TTask } from "src/driver/task/interface/TaskInfrastructure";
+import { TaskAddedOutputData } from "src/domain/tasks/TaskAddedOutputData";
+import { TaskInitOutputData } from "src/domain/tasks/TaskInitOutputData";
 
 export interface ITaskPresenter {
-  initTaskView(categoryList: TCategory[], taskList: TTask[]): void;
-  addTaskState(task: TTask): void;
-  removeTaskStateById(id: number): void;
+  init(outputData: TaskInitOutputData): void;
+  addTask(outputData: TaskAddedOutputData): void;
+  removeTask(id: number): void;
   setError(error: string): void;
   setErrorDetail(taskId: number, error: string): void;
 }

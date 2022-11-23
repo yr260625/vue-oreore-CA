@@ -1,21 +1,21 @@
-import { ITaskViewState } from "src/adapter/tasks/view/TaskViewState";
-import { TaskControllerFactory } from "src/controller/factory/TaskControllerFactory";
+import { TaskViewModel } from "src/adapter/tasks/interfaces/TaskViewModel";
+import { TaskControllerFactory } from "src/adapter/tasks/TaskControllerFactory";
 import { reactive, InjectionKey, inject } from "vue";
+import { TaskView } from "./TaskView";
 
 // provided state in task components
 export const taskState = () => {
   // states
-  const taskViewState = reactive<ITaskViewState>({
-    categoryId: 0,
-    categories: [],
-    taskTitle: "",
-    errorSummary: "",
-    tasks: [],
-  });
+  const taskViewModel = reactive<TaskViewModel>(new TaskViewModel());
+
+  // controller
+  const controller = new TaskControllerFactory(
+    new TaskView(taskViewModel)
+  ).create();
 
   return {
-    taskViewState,
-    controller: new TaskControllerFactory(taskViewState).create(),
+    taskViewModel,
+    controller,
   };
 };
 

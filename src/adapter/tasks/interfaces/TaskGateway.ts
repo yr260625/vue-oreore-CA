@@ -1,10 +1,10 @@
-import { Task } from "src/domain/tasks/TaskEntity";
-import { TTask, TCategory } from "src/driver/task/interface/TaskInfrastructure";
+import { Category } from "src/domain/tasks/entities/Category";
+import { Task } from "src/domain/tasks/entities/Task";
 
 export interface ITaskGateway {
-  findAll(): Promise<TTask[]>;
-  save(task: Task): Promise<TTask>;
-  update(task: Task): Promise<TTask>;
+  findAll(): Promise<Task[]>;
+  save(task: Task): Promise<Task>;
+  update(task: Task): Promise<Task>;
   deleteById(id: number): Promise<void>;
-  findAllCategories(): Promise<TCategory[]>;
+  findAllCategories(): Promise<Category[]>;
 }

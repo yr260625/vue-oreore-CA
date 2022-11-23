@@ -5,8 +5,8 @@ import { useTask } from "./useTask";
 import draggable from "vuedraggable";
 
 // init
-const { taskViewState, controller } = useTask();
-controller.initTaskView();
+const { taskViewModel, controller } = useTask();
+controller.init();
 
 const shownIds = ref<Set<number>>(new Set());
 const toggle = (targetId: number) => {
@@ -22,7 +22,7 @@ const titleStyle = (error: string | null) => {
 </script>
 
 <template>
-  <draggable v-model="taskViewState.tasks" group="people" item-key="id">
+  <draggable v-model="taskViewModel.tasks" group="people" item-key="id">
     <template #item="{ element, index }">
       <article class="pb-2">
         <h2
@@ -42,7 +42,7 @@ const titleStyle = (error: string | null) => {
         </h2>
         <div v-show="shownIds.has(element.id)">
           <textarea
-            v-model="taskViewState.tasks[index].detail"
+            v-model="taskViewModel.tasks[index].detail"
             class="w-full border rounded-b focus:ring-2 h-32 text-base outline-none px-3"
             placeholder="input detail"
             >{{ element.detail }}</textarea

@@ -1,4 +1,5 @@
-import axios, { AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
+import { Api } from "../axiosConfig";
 import {
   ITaskInfrastructure,
   TTask,
@@ -7,17 +8,17 @@ import {
 
 export class TaskApi implements ITaskInfrastructure {
   async findAll(): Promise<TTask[]> {
-    const res: AxiosResponse<TTask[]> = await axios.get<TTask[]>("/task/");
+    const res: AxiosResponse<TTask[]> = await Api.get<TTask[]>("/task/");
     return res.data;
   }
 
   async save(task: TTask): Promise<TTask> {
-    const res: AxiosResponse<TTask> = await axios.post<TTask>("/task/", task);
+    const res: AxiosResponse<TTask> = await Api.post<TTask>("/task/", task);
     return res.data;
   }
 
   async update(task: TTask): Promise<TTask> {
-    const res: AxiosResponse<TTask> = await axios.put<TTask>(
+    const res: AxiosResponse<TTask> = await Api.put<TTask>(
       `/task/${task.id}/`,
       task
     );
@@ -25,11 +26,11 @@ export class TaskApi implements ITaskInfrastructure {
   }
 
   async deleteById(id: number): Promise<void> {
-    axios.delete(`/task/${id}`);
+    Api.delete(`/task/${id}`);
   }
 
   async findAllCategories(): Promise<TCategory[]> {
-    const res: AxiosResponse<TCategory[]> = await axios.get<TCategory[]>(
+    const res: AxiosResponse<TCategory[]> = await Api.get<TCategory[]>(
       "/category/"
     );
     return res.data;

@@ -1,14 +1,16 @@
+import { TaskInputData } from "src/domain/tasks/TaskInputData";
 import { ITaskUsecase } from "src/domain/tasks/interface/TaskUsecase";
 
 export class TaskController {
   constructor(private readonly usecase: ITaskUsecase) {}
 
-  initTaskView() {
-    this.usecase.initTaskView();
+  init() {
+    this.usecase.init();
   }
 
   addTask(categoryId: number, title: string) {
-    this.usecase.addTask(categoryId, title);
+    const taskInputData = new TaskInputData(0, categoryId, title, "");
+    this.usecase.addTask(taskInputData);
   }
 
   deleteTask(id: number) {
@@ -21,6 +23,7 @@ export class TaskController {
     title: string,
     detail: string
   ) {
-    this.usecase.updateTask(taskId, categoryId, title, detail);
+    const taskInputData = new TaskInputData(taskId, categoryId, title, detail);
+    this.usecase.updateTask(taskInputData);
   }
 }

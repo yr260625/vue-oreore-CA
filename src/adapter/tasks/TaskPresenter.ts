@@ -1,34 +1,58 @@
-import { TCategory, TTask } from "src/driver/task/interface/TaskInfrastructure";
+import { TaskAddedOutputData } from "src/domain/tasks/TaskAddedOutputData";
+import { TaskInitOutputData } from "src/domain/tasks/TaskInitOutputData";
+import { ITaskView } from "src/view/components/interfaces/TaskView";
 import { ITaskPresenter } from "./interfaces/TaskPresenter";
-import { ITaskViewState } from "./view/TaskViewState";
+import {
+  TaskViewModel,
+  TCategoryView,
+  TTaskView,
+} from "./interfaces/TaskViewModel";
 
 export class TaskPresenter implements ITaskPresenter {
-  constructor(readonly taskViewState: ITaskViewState) {}
+  constructor(readonly taskView: ITaskView) {}
 
-  initTaskView(categoryList: TCategory[], taskList: TTask[]) {
-    this.taskViewState.categories = categoryList;
-    this.taskViewState.tasks = taskList;
-    this.taskViewState.categoryId = this.taskViewState.categories[0].id;
-  }
-
-  addTaskState(task: TTask) {
-    this.taskViewState.tasks.push(task);
-    this.taskViewState.taskTitle = "";
-    this.taskViewState.categoryId = this.taskViewState.categories[0].id;
-  }
-
-  removeTaskStateById(id: number) {
-    this.taskViewState.tasks = this.taskViewState.tasks.filter(
-      (elm: TTask) => id !== elm.id
+  init(outputData: TaskInitOutputData) {
+    const categories: TCategoryView[] = outputData.categories.map((elm) => {
+      return { id: elm.id, name: elm.name.value };
+    });
+    const tasks: TTaskView[] = outputData.tasks.map((elm) => {
+      return {
+        id: elm.id,
+        category: elm.category.id,
+        title: elm.title.value,
+        detail: elm.detail.value,
+      };
+    });
+    const taskViewModel = new TaskViewModel(
+      categories,
+      categories[0].id,
+      "",
+      "",
+      tasks
     );
+
+    this.taskView.init(taskViewModel);
+  }
+
+  addTask(outputData: TaskAddedOutputData) {
+    const task: TTaskView = {
+      id: outputData.id,
+      category: outputData.categoryId,
+      title: outputData.title,
+      detail: outputData.detail,
+    };
+    this.taskView.addTask(task);
+  }
+
+  removeTask(id: number) {
+    this.taskView.removeTask(id);
   }
 
   setError(error: string) {
-    this.taskViewState.errorSummary = error;
+    this.taskView.setError(error);
   }
 
   setErrorDetail(taskId: number, error: string) {
-    const index = this.taskViewState.tasks.findIndex((elm) => elm.id == taskId);
-    this.taskViewState.tasks[index].error = error;
+    this.taskView.setErrorDetail(taskId, error);
   }
 }

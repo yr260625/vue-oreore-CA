@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { provide } from "vue";
-import Header from "../globals/Header.vue";
-import TaskItemList from "./TaskItemList.vue";
-import TaskPageHeader from "./TaskPageHeader.vue";
+import Header from "../../globals/Header.vue";
+import TaskItemList from "../tasks/TaskItemList.vue";
+import TaskPageHeader from "../tasks/TaskPageHeader.vue";
 import { taskStateKey, taskState } from "./useTask";
 
 // initialize and provide

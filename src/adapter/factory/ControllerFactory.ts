@@ -1,7 +1,7 @@
 export abstract class ControllerFactory<
   INFRASTRUCTURE,
   GATEWAY,
-  VIEWSTATE,
+  VIEW,
   PRESENTER,
   USECASE,
   CONTROLLER
@@ -10,7 +10,7 @@ export abstract class ControllerFactory<
   create(): CONTROLLER {
     const infrastructure: INFRASTRUCTURE = this.getInfrastructure();
     const gateway: GATEWAY = this.getGateway(infrastructure);
-    const viewState: VIEWSTATE = this.getViewState();
+    const viewState: VIEW = this.getView();
     const presenter: PRESENTER = this.getPresenter(viewState);
     const usecase: USECASE = this.getUsecase(gateway, presenter);
     return this.getController(usecase);
@@ -19,8 +19,8 @@ export abstract class ControllerFactory<
   // Implemented in subclasses
   protected abstract getInfrastructure(): INFRASTRUCTURE;
   protected abstract getGateway(infrastructure: INFRASTRUCTURE): GATEWAY;
-  protected abstract getViewState(): VIEWSTATE;
-  protected abstract getPresenter(state: VIEWSTATE): PRESENTER;
+  protected abstract getView(): VIEW;
+  protected abstract getPresenter(state: VIEW): PRESENTER;
   protected abstract getUsecase(
     gateway: GATEWAY,
     presenter: PRESENTER

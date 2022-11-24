@@ -1,22 +1,22 @@
-@startuml
+@startuml proccess-flow
 
 left to right direction
 ' Horizontal lines: -->, <--, <-->
 ' Vertical lines: ->, <-, <->
 
-agent controller
-agent view
-agent usecases
-agent gateways
-agent presentations
-agent viewState
-agent APIDriver #aliceblue;line:blue
+agent controller #9ff4ba
+agent view #a2d3f9
+agent usecases #f3a099
+agent gateways #9ff4ba
+agent presentations #9ff4ba
+agent viewModel #a2d3f9
+agent driver #a2d3f9
 
 view --> controller: イベントハンドリング
 controller --> usecases: 処理振り分け
 usecases --> gateways: データ処理を委譲
-gateways --> APIDriver
+gateways --> driver
 usecases -> presentations: データ処理結果を委譲
-viewState <-- presentations: viewStateを更新
-view <-- viewState
+viewModel <-- presentations: viewModelを更新
+view <-- viewModel
 @enduml

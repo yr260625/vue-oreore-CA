@@ -23,11 +23,17 @@ const linkStyle = (url: string) => {
 </script>
 
 <template>
-  <header class="flex justify-left items-center gap-12 w-full px-4 py-2 bg-gray-800">
-    <div><img src="../../../assets/vue.svg" /></div>
+  <header
+    class="flex justify-left items-center gap-12 w-full px-4 py-2 bg-gray-800"
+  >
+    <div><img src="../../../../public/vue.svg" /></div>
     <nav class="flex-1 overflow-auto">
       <ul class="py-2 flex gap-4">
-        <li v-for="link in links" class="rounded-md hover:bg-gray-700" :class="linkStyle(link.url)">
+        <li
+          v-for="link in links"
+          class="rounded-md hover:bg-gray-700"
+          :class="linkStyle(link.url)"
+        >
           <a :href="link.url" class="inline-block p-2">{{ link.title }}</a>
         </li>
       </ul>

@@ -1,8 +1,8 @@
 import {
-  TTaskView,
   TaskViewModel,
+  TTaskView,
 } from "src/adapter/tasks/interfaces/TaskViewModel";
-import { ITaskView } from "../../interfaces/TaskView";
+import { ITaskView } from "src/view/components/interfaces/TaskView";
 
 // each method will update reactive state in vue components
 export class TaskView implements ITaskView {

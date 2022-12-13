@@ -1,36 +1,23 @@
+import { ITaskPresenter } from "src/adapter/tasks/interfaces/TaskPresenter";
+import {
+  TaskViewModel,
+  TTaskView,
+} from "src/adapter/tasks/interfaces/TaskViewModel";
 import { TaskAddedOutputData } from "src/domain/tasks/TaskAddedOutputData";
 import { TaskInitOutputData } from "src/domain/tasks/TaskInitOutputData";
 import { ITaskView } from "src/view/components/interfaces/TaskView";
-import { ITaskPresenter } from "./interfaces/TaskPresenter";
-import {
-  TaskViewModel,
-  TCategoryView,
-  TTaskView,
-} from "./interfaces/TaskViewModel";
 
 export class TaskPresenter implements ITaskPresenter {
   constructor(readonly taskView: ITaskView) {}
 
   init(outputData: TaskInitOutputData) {
-    const categories: TCategoryView[] = outputData.categories.map((elm) => {
-      return { id: elm.id, name: elm.name.value };
-    });
-    const tasks: TTaskView[] = outputData.tasks.map((elm) => {
-      return {
-        id: elm.id,
-        category: elm.category.id,
-        title: elm.title.value,
-        detail: elm.detail.value,
-      };
-    });
     const taskViewModel = new TaskViewModel(
-      categories,
-      categories[0].id,
+      outputData.categories,
+      outputData.categories[0].id,
       "",
       "",
-      tasks
+      outputData.tasks
     );
-
     this.taskView.init(taskViewModel);
   }
 

@@ -1,4 +1,4 @@
-import { TaskInputData } from "../TaskInputData";
+import { TaskInputData } from "src/domain/tasks/TaskInputData";
 
 export interface ITaskUsecase {
   init(): Promise<void>;

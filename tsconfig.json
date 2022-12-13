@@ -28,6 +28,12 @@
     "src/**/*.tsx",
     "src/**/*.vue"
   ],
+  "exclude": [
+    "node_modules",
+    "image",
+    "dist",
+    "src/assets",
+  ],
   "references": [
     {
       "path": "./tsconfig.node.json"

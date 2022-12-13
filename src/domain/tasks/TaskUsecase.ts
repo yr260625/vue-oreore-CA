@@ -1,9 +1,10 @@
 import { ITaskGateway } from "src/adapter/tasks/interfaces/TaskGateway";
 import { ITaskPresenter } from "src/adapter/tasks/interfaces/TaskPresenter";
-import { ITaskUsecase } from "./interface/TaskUsecase";
-import { TaskInputData } from "./TaskInputData";
-import { TaskInitOutputData } from "./TaskInitOutputData";
-import { TaskAddedOutputData } from "./TaskAddedOutputData";
+import { Task } from "src/domain/tasks/entities/Task";
+import { ITaskUsecase } from "src/domain/tasks/interface/TaskUsecase";
+import { TaskAddedOutputData } from "src/domain/tasks/TaskAddedOutputData";
+import { TaskInitOutputData } from "src/domain/tasks/TaskInitOutputData";
+import { TaskInputData } from "src/domain/tasks/TaskInputData";
 
 export class TaskUsecase implements ITaskUsecase {
   constructor(
@@ -29,13 +30,24 @@ export class TaskUsecase implements ITaskUsecase {
 
   /**
    * save single task in DB, and add the task the state of vue.
-   * @param taskInputData
+   * @param categoryId
+   * @param title
    */
   async addTask(taskInputData: TaskInputData): Promise<void> {
     try {
-      const task = taskInputData.createTask();
+      const task = Task.create(
+        taskInputData.id,
+        taskInputData.categoryId,
+        taskInputData.title,
+        taskInputData.detail
+      );
       const newTask = await this.gateway.save(task);
-      const outputData = TaskAddedOutputData.createFromEntity(newTask);
+      const outputData = new TaskAddedOutputData(
+        newTask.id,
+        newTask.category.id,
+        newTask.title.value,
+        newTask.detail.value
+      );
       this.presenter.addTask(outputData);
     } catch (error: unknown) {
       this.presenter.setError(this.getErrorMessage(error));
@@ -44,11 +56,19 @@ export class TaskUsecase implements ITaskUsecase {
 
   /**
    * update single task in DB.
-   * @param taskInputData
+   * @param taskId
+   * @param categoryId
+   * @param title
+   * @param detail
    */
   async updateTask(taskInputData: TaskInputData): Promise<void> {
     try {
-      const task = taskInputData.createTask();
+      const task = Task.create(
+        taskInputData.id,
+        taskInputData.categoryId,
+        taskInputData.title,
+        taskInputData.detail
+      );
       await this.gateway.update(task);
     } catch (error: unknown) {
       this.presenter.setErrorDetail(
@@ -77,7 +97,6 @@ export class TaskUsecase implements ITaskUsecase {
    * @returns
    */
   private getErrorMessage(error: unknown): string {
-    console.log(error);
     if (error instanceof Error) {
       return error.message;
     } else {

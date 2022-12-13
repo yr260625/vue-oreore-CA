@@ -1,10 +1,7 @@
+import { ITaskGateway } from "src/adapter/tasks/interfaces/TaskGateway";
 import { Category } from "src/domain/tasks/entities/Category";
 import { Task } from "src/domain/tasks/entities/Task";
-import { CategoryName } from "src/domain/tasks/entities/vo/CategoryName";
-import { TaskDetail } from "src/domain/tasks/entities/vo/TaskDetail";
-import { TaskTitle } from "src/domain/tasks/entities/vo/TaskTitle";
-import { ITaskInfrastructure } from "src/driver/task/interface/TaskInfrastructure";
-import { ITaskGateway } from "./interfaces/TaskGateway";
+import { ITaskInfrastructure } from "src/driver/tasks/interfaces/TaskInfrastructure";
 
 export class TaskGateway implements ITaskGateway {
   private readonly infrastructure: ITaskInfrastructure;
@@ -16,18 +13,14 @@ export class TaskGateway implements ITaskGateway {
   async findAll(): Promise<Task[]> {
     const tasks = await this.infrastructure.findAll();
     return tasks.map((elm) => {
-      const id = elm.id;
-      const category = new Category(elm.category, new CategoryName(""));
-      const taskTitle = new TaskTitle(elm.title);
-      const taskDetail = new TaskDetail(elm.detail);
-      return new Task(id, category, taskTitle, taskDetail);
+      return Task.create(elm.id, elm.category, elm.title, elm.detail);
     });
   }
 
   async findAllCategories(): Promise<Category[]> {
     const categories = await this.infrastructure.findAllCategories();
     return categories.map((elm) => {
-      return new Category(elm.id, new CategoryName(elm.name));
+      return Category.create(elm.id, elm.name);
     });
   }
 
@@ -39,11 +32,12 @@ export class TaskGateway implements ITaskGateway {
       detail: task.detail.value,
     };
     const savedItem = await this.infrastructure.save(saveItem);
-    const id = savedItem.id;
-    const category = new Category(savedItem.category, new CategoryName(""));
-    const taskTitle = new TaskTitle(savedItem.title);
-    const taskDetail = new TaskDetail(savedItem.detail);
-    return new Task(id, category, taskTitle, taskDetail);
+    return Task.create(
+      savedItem.id,
+      savedItem.category,
+      savedItem.title,
+      savedItem.detail
+    );
   }
 
   async update(task: Task): Promise<Task> {
@@ -54,11 +48,12 @@ export class TaskGateway implements ITaskGateway {
       detail: task.detail.value,
     };
     const updatedItem = await this.infrastructure.update(updateItem);
-    const id = updatedItem.id;
-    const category = new Category(updatedItem.category, new CategoryName(""));
-    const taskTitle = new TaskTitle(updatedItem.title);
-    const taskDetail = new TaskDetail(updatedItem.detail);
-    return new Task(id, category, taskTitle, taskDetail);
+    return Task.create(
+      updatedItem.id,
+      updatedItem.category,
+      updatedItem.title,
+      updatedItem.detail
+    );
   }
 
   deleteById(id: number): Promise<void> {

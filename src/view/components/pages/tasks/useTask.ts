@@ -1,7 +1,7 @@
 import { TaskViewModel } from "src/adapter/tasks/interfaces/TaskViewModel";
 import { TaskControllerFactory } from "src/adapter/tasks/TaskControllerFactory";
+import { TaskView } from "src/view/components/pages/tasks/TaskView";
 import { reactive, InjectionKey, inject } from "vue";
-import { TaskView } from "./TaskView";
 
 // provided state in task components
 export const taskState = () => {

@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import Tasks from "./components/pages/tasks/Tasks.vue";
 import "./index.css";
 </script>
 
 <template>
-  <Tasks></Tasks>
+  <RouterView />
 </template>

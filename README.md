@@ -60,6 +60,6 @@ npm run build
 * ユーザーが直接触れる画面と、そのコンポーネントを取りまとめる。
 * 各画面は、必要なcontrollerを生成して、画面操作に応じたcontrollerメソッドを実行する。
 
-### Process Flow
+### Class Diagram
 
-![process-flow](./image/process-flow.png)
+![class](./image/class.svg)

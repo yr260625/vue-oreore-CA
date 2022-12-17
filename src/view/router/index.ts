@@ -18,4 +18,12 @@ export const router = createRouter({
   ],
 });
 
+// If it is uncertified, redirect to login page
+// router.beforeEach((to, from) => {
+//   const isAuthenticated = false;
+//   if (!isAuthenticated && to.name !== "login") {
+//     return { name: "login" };
+//   }
+// });
+
 export default router;

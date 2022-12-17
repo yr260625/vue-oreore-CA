@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import { EnvelopeIcon, LockOpenIcon } from "@heroicons/vue/24/outline";
+import { ref } from "vue";
+import { login } from "./Login";
+
+const email = ref("admin@admin.co.jp");
+const password = ref("admin");
 </script>
 
 <template>
@@ -10,8 +15,8 @@ import { EnvelopeIcon, LockOpenIcon } from "@heroicons/vue/24/outline";
         <!-- input -->
         <div class="relative">
           <input
+            v-model="email"
             class="appearance-none border pl-12 border-gray-100 shadow-sm focus:shadow-md focus:placeholder-gray-600 transition rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline"
-            id="username"
             type="text"
             placeholder="Email"
           />
@@ -21,8 +26,8 @@ import { EnvelopeIcon, LockOpenIcon } from "@heroicons/vue/24/outline";
         </div>
         <div class="relative">
           <input
+            v-model="password"
             class="appearance-none border pl-12 border-gray-100 shadow-sm focus:shadow-md focus:placeholder-gray-600 transition rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline"
-            id="username"
             type="text"
             placeholder="Password"
           />
@@ -33,9 +38,10 @@ import { EnvelopeIcon, LockOpenIcon } from "@heroicons/vue/24/outline";
         <!-- button -->
         <div class="flex items-center justify-center">
           <button
-            class="py-2 px-4 uppercase bg-teal-400 border active:bg-teal-800 text-base text-white rounded-lg hover:bg-teal-600"
+            @click="login(email, password)"
+            class="py-2 px-4 bg-teal-400 border active:bg-teal-800 text-base text-white rounded-lg hover:bg-teal-600"
           >
-            Sign in
+            SIGN IN
           </button>
         </div>
       </div>

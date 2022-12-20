@@ -1,10 +1,15 @@
 <script setup lang="ts">
 import { EnvelopeIcon, LockOpenIcon } from "@heroicons/vue/24/outline";
-import { ref } from "vue";
-import { login } from "./Login";
+import { provide, ref } from "vue";
+import { auth, loginStateKey, loginStore } from "./useAuth";
+import { useCookies } from "vue3-cookies";
 
 const email = ref("admin@admin.co.jp");
 const password = ref("admin");
+const { cookies } = useCookies();
+cookies.remove("token");
+// // initialize and provide
+// provide(loginStateKey, loginStore());
 </script>
 
 <template>
@@ -38,7 +43,7 @@ const password = ref("admin");
         <!-- button -->
         <div class="flex items-center justify-center">
           <button
-            @click="login(email, password)"
+            @click="auth(email, password)"
             class="py-2 px-4 bg-teal-400 border active:bg-teal-800 text-base text-white rounded-lg hover:bg-teal-600"
           >
             SIGN IN

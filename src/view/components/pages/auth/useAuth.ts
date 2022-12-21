@@ -18,7 +18,9 @@ export const auth = async (email: string, password: string) => {
 
     // 遷移
     router.push({ path: "/tasks" });
-  } catch (error) {}
+  } catch (error) {
+    window.alert(error);
+  }
 };
 
 // export const loginStore = () => {

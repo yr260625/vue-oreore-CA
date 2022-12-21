@@ -1,4 +1,4 @@
-# vue-todo-with-cleanArchitecture
+# vue-oreore-CA
 
 clean architecture勉強用Todoアプリ
 

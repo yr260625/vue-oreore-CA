@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { EnvelopeIcon, LockOpenIcon } from "@heroicons/vue/24/outline";
-import { provide, ref } from "vue";
-import { auth, loginStateKey, loginStore } from "./useAuth";
+import { ref } from "vue";
+import { auth } from "./useAuth";
 import { useCookies } from "vue3-cookies";
 
 const email = ref("admin@admin.co.jp");

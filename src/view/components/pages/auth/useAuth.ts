@@ -1,7 +1,6 @@
 import { Auth } from "src/domain/auth/entities/Auth";
 import { AuthApi } from "src/driver/auth/interfaces/AuthApi";
 import router from "src/view/router";
-import { inject, InjectionKey, reactive } from "vue";
 import { useCookies } from "vue3-cookies";
 
 export const auth = async (email: string, password: string) => {

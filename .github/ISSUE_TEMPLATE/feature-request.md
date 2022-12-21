@@ -1,20 +1,22 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: ''
+title: "[Feature]"
 labels: ''
 assignees: ''
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+## 概要
+<!-- 現状のあり方、その問題点-->
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+## 目的
+<!-- 上記に対してどのようにしたいか-->
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+## 変更内容
+<!-- 目的を達成するにはどうするか-->
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+## タスク
+- [ ] タスク1
+- [ ] タスク2
+- [ ] タスク3

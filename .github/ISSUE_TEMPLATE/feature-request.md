@@ -1,12 +1,3 @@
----
-name: Feature request
-about: Suggest an idea for this project
-title: "[Feature]"
-labels: ''
-assignees: ''
-
----
-
 ## 概要
 <!-- 現状のあり方、その問題点-->
 

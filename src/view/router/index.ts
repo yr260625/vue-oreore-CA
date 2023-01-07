@@ -1,4 +1,5 @@
 import { AuthApi } from "src/driver/auth/interfaces/AuthApi";
+import { USE_STORAGE } from "src/features/constants";
 import { createRouter, createWebHistory } from "vue-router";
 import { useCookies } from "vue3-cookies";
 import Login from "../components/pages/auth/Login.vue";
@@ -23,6 +24,11 @@ export const router = createRouter({
 
 // Navigation Guard
 router.beforeEach(async (to, from) => {
+  // invalidate before guards
+  if (USE_STORAGE) {
+    return true;
+  }
+
   // get token from cookie
   const { cookies } = useCookies();
   const token = cookies.get("token");

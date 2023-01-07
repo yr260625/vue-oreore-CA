@@ -1,9 +1,15 @@
 import { Auth } from "src/domain/auth/entities/Auth";
 import { AuthApi } from "src/driver/auth/interfaces/AuthApi";
+import { USE_STORAGE } from "src/features/constants";
 import router from "src/view/router";
 import { useCookies } from "vue3-cookies";
 
 export const auth = async (email: string, password: string) => {
+  if (USE_STORAGE) {
+    router.push({ path: "/tasks" });
+    return;
+  }
+
   try {
     // 認証情報ドメイン生成
     const auth = new Auth(email, password);
@@ -22,27 +28,3 @@ export const auth = async (email: string, password: string) => {
     window.alert(error);
   }
 };
-
-// export const loginStore = () => {
-//   // states
-//   const loginViewModel = reactive(new LoginViewModel());
-
-//   // controller
-//   const controller = new AuthControllerFactory(
-//     new LoginView(loginViewModel)
-//   ).create();
-
-//   return {
-//     loginViewModel,
-//     controller,
-//   };
-// };
-
-// // component injection
-// export type loginStoreType = ReturnType<typeof loginStore>;
-// export const loginStateKey: InjectionKey<loginStoreType> = Symbol("authState");
-// export const useAuth = () => {
-//   const state = inject(loginStateKey);
-//   if (!state) throw new Error("key is undefined");
-//   return state;
-// };

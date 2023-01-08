@@ -9,7 +9,6 @@ import { TaskUsecase } from "src/domain/tasks/TaskUsecase";
 import { ITaskInfrastructure } from "src/driver/tasks/interfaces/TaskInfrastructure";
 import { TaskApi } from "src/driver/tasks/TaskApi";
 import { TaskSessionStorage } from "src/driver/tasks/TaskSessionStorage";
-import { USE_STORAGE } from "src/features/constants";
 import { ITaskView } from "src/view/components/interfaces/TaskView";
 
 export class TaskControllerFactory extends ControllerFactory<
@@ -25,7 +24,7 @@ export class TaskControllerFactory extends ControllerFactory<
   }
 
   getInfrastructure(): ITaskInfrastructure {
-    if (USE_STORAGE) {
+    if (import.meta.env.VITE_USE_STORAGE) {
       return new TaskSessionStorage();
     }
     return new TaskApi();

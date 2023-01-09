@@ -3,7 +3,7 @@ import { useCookies } from "vue3-cookies";
 
 // 基本設定
 const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
+  baseURL: import.meta.env.VITE_VITE_API_URL,
   timeout: import.meta.env.VITE_TIME_OUT,
   headers: {
     "Content-Type": "application/json",

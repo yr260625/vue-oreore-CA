@@ -24,7 +24,7 @@ export class TaskControllerFactory extends ControllerFactory<
   }
 
   getInfrastructure(): ITaskInfrastructure {
-    if (import.meta.env.VITE_USE_STORAGE) {
+    if (import.meta.env.VITE_SKIP_LOGIN) {
       return new TaskSessionStorage();
     }
     return new TaskApi();

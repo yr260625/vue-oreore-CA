@@ -4,7 +4,7 @@ import router from "src/view/router";
 import { useCookies } from "vue3-cookies";
 
 export const auth = async (email: string, password: string) => {
-  if (import.meta.env.VITE_USE_STORAGE) {
+  if (import.meta.env.VITE_SKIP_LOGIN) {
     router.push({ path: "/tasks" });
     return;
   }

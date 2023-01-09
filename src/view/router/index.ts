@@ -24,7 +24,7 @@ export const router = createRouter({
 // Navigation Guard
 router.beforeEach(async (to, from) => {
   // invalidate before guards
-  if (import.meta.env.VITE_USE_STORAGE) {
+  if (import.meta.env.VITE_SKIP_LOGIN) {
     return true;
   }
 

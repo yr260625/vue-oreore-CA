@@ -26,6 +26,8 @@ const mockNewTask: Partial<AxiosResponse> = {
   data: { id: 1, category: 1, title: "test1_upd", detail: "test1_upd" },
 };
 
+// useCookies mock
+jest.mock("vue3-cookies", () => {});
 // axios mock
 const axiosGetSpy = jest.spyOn(Api, "get");
 const axiosPostSpy = jest.spyOn(Api, "post");

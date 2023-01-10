@@ -1,11 +1,10 @@
-import axios, { Axios, AxiosInstance, AxiosRequestConfig } from "axios";
-import { BASE_URL, TIME_OUT } from "src/features/constants";
+import axios, { AxiosRequestConfig } from "axios";
 import { useCookies } from "vue3-cookies";
 
 // 基本設定
 const axiosInstance = axios.create({
-  baseURL: BASE_URL,
-  timeout: TIME_OUT,
+  baseURL: String(process.env.VITE_VITE_API_URL),
+  timeout: Number(process.env.VITE_TIME_OUT),
   headers: {
     "Content-Type": "application/json",
   },
